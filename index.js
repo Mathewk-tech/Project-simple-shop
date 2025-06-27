@@ -11,10 +11,13 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(url)//we do this to fecth data in our api
     .then(res => res.json())//this is like saying,hi..the api we have fetched let's make it to now be in json which is always in string form btw
     .then(data => {
-//now we haveour json in strng form..nice..so now whe we say .then(data=>{})we saying lets now do something with this data...which the api data...data here is just like 
+//now we have our json in strng form..nice..so now whe we say .then(data=>{})we saying lets now do something with this data...which the api data...data here is just like 
 //a name...but its special cause anything thats named after converting our api details into json..it becomes the apis data
 //so here i said let that data to be = to allproducts so that i can access it later..
         allproducts = data;
+//why showproducts(data)?..well lets just say we want to see all the products.well our showproducts function dosent really show all products..
+//so when we say showproducts(data) we're lie telling it callback the function but this time replace its parameter with data...which remember 
+//=to all products...so know when we 
         showProducts(data);
     });
 });
@@ -29,6 +32,7 @@ function showProducts(products){
         div.innerHTML=`
           <h3>${product.title}</h3>
             <p><strong>Category:</strong> ${product.category}</p>
+            ${product.image ?`<img src="${product.image}" width="100px">` : ''}
             <p><strong>Price:</strong> ${product.price}</p>
             <button data-id="${product.id}">Add to cart</button>`;
             productSection.appendChild(div);
