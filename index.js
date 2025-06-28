@@ -29,12 +29,27 @@ function showProducts(products){
     products.forEach(product => {
         const div=document.createElement("div");
         div.className='product';
+        //the const rating checks if in my api there is rating..if not it defaults it to 0
+        const rating = product.rating ? product.rating.rate : 0;
+        //math.floor rounds off the rating to a whole number
+        const fullStars = Math.floor(rating);
+        //so that we don't get rid of of the half star rating we do this...at times it can be 0.8 not 0.5...
+        //so this says that even if its greater than 0.5 just make it a half rating
+        const halfStar = rating % 1 >= 0.5;
+        //this just subtracts to get how many empty satrs are remaining to make a five star rating
+        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+        let starsHtml = '';//this just clears everything and whatever result will be obtained below is what will be put inside the empty starsHtml
+        for (let i = 0; i < fullStars; i++) starsHtml += '★';
+        if (halfStar) starsHtml += '½';//i couldn't find a half rating star so i just put ½
+        for (let i = 0; i < emptyStars; i++) starsHtml += '☆';
+
         div.innerHTML=`
           <h3>${product.title}</h3>
-            <p><strong>Category:</strong> ${product.category}</p>
-            ${product.image ?`<img src="${product.image}" width="100px">` : ''}
-            <p><strong>Price:</strong> ${product.price}</p>
-            <button data-id="${product.id}" style="cursor: pointer;">Add to cart</button>`;
+          <p><strong>Category:</strong> ${product.category}</p>
+          ${product.image ? `<img src="${product.image}" width="100px">` : ''}
+          <p><strong>Price:</strong> ${product.price}</p> 
+          <p><strong>Rating:</strong> <span style="color: gold; font-size: 1.2em;">${starsHtml}</span> (${rating})</p>
+          <button data-id="${product.id}" style="cursor: pointer;">Add to cart</button>`;
             productSection.appendChild(div);
     });
 }
