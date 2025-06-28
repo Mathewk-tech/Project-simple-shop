@@ -34,6 +34,7 @@ function showProducts(products){
         div.style.padding='40px';
         div.style.borderRadius='8px';
         div.style.boxShadow='0 0 5px rgba(0,0,0,0.1)';
+        
 
         //the const rating checks if in my api there is rating..if not it defaults it to 0
         const rating = product.rating ? product.rating.rate : 0;
