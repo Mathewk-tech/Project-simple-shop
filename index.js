@@ -29,6 +29,8 @@ function showProducts(products){
     products.forEach(product => {
         const div=document.createElement("div");
         div.className='product';
+        div.style.background='white';
+        div.style.color='black';
         //the const rating checks if in my api there is rating..if not it defaults it to 0
         const rating = product.rating ? product.rating.rate : 0;
         //math.floor rounds off the rating to a whole number
