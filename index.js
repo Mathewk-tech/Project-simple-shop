@@ -25,7 +25,23 @@ document.addEventListener('DOMContentLoaded', function() {
 //step two is creating a function that shows all products
 function showProducts(products){
     productSection.innerHTML='';
-    
+    // Set grid styles for the product section container
+    //products in our db.json is an array, not an object so we cant use products.category
+
+    productSection.style.display = 'grid';
+    if (products[0].category === "electronics") {
+        productSection.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        productSection.style.gap = '20px';
+        productSection.style.padding = '60px';
+    } else if (products[0].category === "women's clothing") {
+        productSection.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        productSection.style.gap = '20px';
+        productSection.style.padding = '60px';
+    } else {
+        productSection.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
+        productSection.style.gap = '20px';
+        productSection.style.padding = '60px';
+    }
     products.forEach(product => {
         const div=document.createElement("div");
         div.className='product';
@@ -58,6 +74,7 @@ function showProducts(products){
           <p><strong>Rating:</strong> <span style="color: gold; font-size: 1.2em;">${starsHtml}</span> (${rating})</p>
           <button data-id="${product.id}" style="cursor: pointer;">Add to cart</button>`;
             productSection.appendChild(div);
+    
     });
 }
 
