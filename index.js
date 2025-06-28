@@ -72,10 +72,35 @@ function showProducts(products){
           ${product.image ? `<img src="${product.image}" width="100px">` : ''}
           <p><strong>Price:</strong> KSH ${product.price}</p> 
           <p><strong>Rating:</strong> <span style="color: gold; font-size: 1.2em;">${starsHtml}</span> (${rating})</p>
-          <button data-id="${product.id}" style="cursor: pointer;">Add to cart</button>`;
-            productSection.appendChild(div);
+          <button class="add-to-cart" data-title="${product.title}" data-price="${product.price}" style="cursor: pointer;">Add to cart</button>
+        `;
+        productSection.appendChild(div);
     
     });
+    const u=document.querySelectorAll('.add-to-cart');
+    u.forEach(buttuon =>{
+        buttuon.addEventListener('click',function(){
+        const title=this.dataset.title;
+        const price=parseFloat(this.dataset.price);
+        cart.push({title,price});
+        updatecart();
+    })
+
+    })
+    
+}
+
+function updatecart(){
+    m.innerHTML='';
+    let total=0;
+
+    cart.forEach(item =>{
+        const li=document.createElement('li');
+        li.textContent=`${item.title}-KSH ${item.price}`;
+        m.appendChild(li);
+        total +=item.price;
+    });
+    z.textContent=total.toFixed(2);
 }
 
 
