@@ -4,7 +4,7 @@ const url = "https://fakestoreapi.com/products";
 let allproducts = [];
 const m =document.getElementById("items");
 const z=document.getElementById('total');
-let cart=[]//here we are saying we have an array for cart but its = to 0 for now
+let cart=[];//here we are saying we have an array for cart but its = to 0 for now
 
 //step one is loading all the data when the document is opened by fetching data from the api
 document.addEventListener('DOMContentLoaded', function() {
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //step two is creating a function that shows all products
 function showProducts(products){
     productSection.innerHTML='';
-
+    
     products.forEach(product => {
         const div=document.createElement("div");
         div.className='product';
