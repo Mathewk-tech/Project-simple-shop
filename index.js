@@ -34,7 +34,7 @@ function showProducts(products){
             <p><strong>Category:</strong> ${product.category}</p>
             ${product.image ?`<img src="${product.image}" width="100px">` : ''}
             <p><strong>Price:</strong> ${product.price}</p>
-            <button data-id="${product.id}" >Add to cart</button>`;
+            <button data-id="${product.id}" style="cursor: pointer;">Add to cart</button>`;
             productSection.appendChild(div);
     });
 }
