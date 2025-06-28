@@ -54,7 +54,7 @@ function showProducts(products){
           <h3>${product.title}</h3>
           <p><strong>Category:</strong> ${product.category}</p>
           ${product.image ? `<img src="${product.image}" width="100px">` : ''}
-          <p><strong>Price:</strong> ${product.price}</p> 
+          <p><strong>Price:</strong> KSH ${product.price}</p> 
           <p><strong>Rating:</strong> <span style="color: gold; font-size: 1.2em;">${starsHtml}</span> (${rating})</p>
           <button data-id="${product.id}" style="cursor: pointer;">Add to cart</button>`;
             productSection.appendChild(div);
