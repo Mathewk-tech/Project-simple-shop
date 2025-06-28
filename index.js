@@ -70,7 +70,15 @@ buttons.forEach(buttuon=>{
     //value in the api
     showProducts(x);
  }
- })
+    const imageUrl=buttuon.dataset.image;
+    if(imageUrl){
+        document.getElementById('products').style.backgroundImage=`url('${imageUrl}')`;
+        document.getElementById('products').style.backgroundSize='cover';
+        document.getElementById('products').style.backgroundPosition='center';
+        document.getElementById('products').style.backgroundRepeat='no-repeat';
+    }
+
+})
 })
 
 
