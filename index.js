@@ -72,7 +72,7 @@ function showProducts(products){
           ${product.image ? `<img src="${product.image}" width="100px">` : ''}
           <p><strong>Price:</strong> KSH ${product.price}</p> 
           <p><strong>Rating:</strong> <span style="color: gold; font-size: 1.2em;">${starsHtml}</span> (${rating})</p>
-          <button class="add-to-cart" data-title="${product.title}" data-price="${product.price}" style="cursor: pointer;">Add to cart</button>
+          <button class="add-to-cart" data-title="${product.title}" data-price="${product.price}" data-image="${product.image}" style="cursor: pointer;">Add to cart</button>
         `;
         productSection.appendChild(div);
     
@@ -82,7 +82,8 @@ function showProducts(products){
         buttuon.addEventListener('click',function(){
         const title=this.dataset.title;
         const price=parseFloat(this.dataset.price);
-        cart.push({title,price});
+        const image = this.dataset.image;
+        cart.push({title,price,image});
         updatecart();
     })
 
@@ -91,16 +92,28 @@ function showProducts(products){
 }
 
 function updatecart(){
-    m.innerHTML='';
+    const itemList=document.getElementById("items");
+    const totaldisplay=document.getElementById("total");
+    itemList.innerHTML='';
     let total=0;
 
     cart.forEach(item =>{
         const li=document.createElement('li');
-        li.textContent=`${item.title}-KSH ${item.price}`;
-        m.appendChild(li);
+        li.style.display="flex";
+        li.style.alignItems="center";
+        li.style.marginBottom="10px";
+
+        li.innerHTML = `
+            <img src="${item.image}" width="50px" height="50px" style="margin-right: 10px;">
+            <span style="flex: 1;">${item.title}</span>
+            <strong>KSH ${item.price}</strong>
+        `;
+
+       
+        itemList.appendChild(li);
         total +=item.price;
     });
-    z.textContent=total.toFixed(2);
+    totaldisplay.textContent = total.toFixed(2);
 }
 
 
@@ -108,26 +121,47 @@ function updatecart(){
 //depending on the button category clicked..this has to be in a loop so for it to work we wll use a foreach loop but there has to be an event listener
 //to listen for a button click
 
-buttons.forEach(buttuon=>{
- buttuon.addEventListener('click', ()=>{
+buttons.forEach(button=>{
+ button.addEventListener('click', ()=>{
  //we must first of all get the category
- const category=buttuon.dataset.category;
- if(category==='all'){
-    showProducts(allproducts);//which if you remember we had made it = to the data in api in line 12
- }else{
-    const x=allproducts.filter(p=>p.category===category);//this is a boolean that will only return true values..that is it will only return if the value is = to the 
-    //value in the api
-    showProducts(x);
+ const category = button.dataset.category.toLowerCase();
+ if(category==='cart'){
+    document.getElementById('cart-section').style.display = 'block';
+    productSection.style.backgroundImage = 'none'; 
+    productSection.style.display = 'none';
+
+    updatecart(); // Refresh cart items display
+    return; // Stop here
+
  }
-    const imageUrl=buttuon.dataset.image;
-    if(imageUrl){
-        document.getElementById('products').style.backgroundImage=`url('${imageUrl}')`;
-        document.getElementById('products').style.backgroundSize='cover';
-        document.getElementById('products').style.backgroundPosition='center';
-        document.getElementById('products').style.backgroundRepeat='no-repeat';
-    }
+   // Show products
+    document.getElementById('products').style.display = 'grid';
+    document.getElementById('cart-section').style.display = 'none';
+
+     if (category === 'all') {
+            showProducts(allproducts);
+        } else {
+            const filtered = allproducts.filter(p => p.category === category);
+            showProducts(filtered);
+        }
+
+        const imageUrl = button.dataset.image;
+        if (imageUrl) {
+            productSection.style.backgroundImage = `url('${imageUrl}')`;
+            productSection.style.backgroundSize = 'cover';
+            productSection.style.backgroundPosition = 'center';
+            productSection.style.backgroundRepeat = 'no-repeat';
+        }
 
 })
 })
+
+function showAllProducts() {
+    document.getElementById('cart-section').style.display = 'none';
+    document.getElementById('products').style.display = 'grid';
+    productSection.style.backgroundImage = 'none'; 
+    showProducts(allproducts); // refresh product display
+}
+
 
 
