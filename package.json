@@ -3,7 +3,9 @@
     "start": "npx http-server . -p 3000"
   },
   "dependencies": {
-    "json-server": "^1.0.0-beta.3"
+    "json-server": "^1.0.0-beta.3",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

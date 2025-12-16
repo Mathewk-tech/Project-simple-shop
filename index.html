@@ -8,10 +8,18 @@
 </head>
 <body>
     <header>
-        <h1>Simple Shop</h1>
+        <h1 id="main-title">Simple Shop</h1>
     </header>
 
     <main>
+        <section id="welcome">
+            <div class="welcome-content">
+                <h2>Welcome to Our Store!</h2>
+                <p>Discover amazing products at great prices. Browse our collection and find what you need.</p>
+                <button id="continue-btn">Continue to Products</button>
+            </div>
+        </section>
+
         <section id="controls">
             <button data-category="all">All Products</button>
             <button data-category="men's clothing">Men's Clothing</button>
@@ -29,6 +37,10 @@
             <h1>Your Cart</h1>
             <ul id="items"></ul>
             <p>Total: KSH <span id="total">0.00</span></p>
+            <button id="purchase-btn" style="display: none;">Purchase with M-Pesa</button>
+            <div id="payment-loading" style="display: none; margin-top: 10px;">Processing payment...</div>
+            <div id="payment-success" style="display: none; margin-top: 10px; color: green;">STK Push sent! Check your phone to complete payment.</div>
+            <div id="payment-error" style="display: none; margin-top: 10px; color: red;"></div>
         </section>
     </main>
 
