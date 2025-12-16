@@ -7,7 +7,7 @@ const z=document.getElementById('total');
 let cart=[];//here we are saying we have an array for cart but its = to 0 for now
 
 // Payment related variables
-const BACKEND_URL = ' https://cationic-nonhabitually-joella.ngrok-free.dev'; // Backend URL for M-Pesa API
+const BACKEND_URL = 'https://cationic-nonhabitually-joella.ngrok-free.dev'; // Backend URL for M-Pesa API
 const PAYMENT_PHONE = '254708799547'; // Fixed phone number for payment
 let paymentLoading = false;
 
