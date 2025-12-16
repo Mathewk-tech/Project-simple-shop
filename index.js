@@ -124,24 +124,12 @@ buttons.forEach(button=>{
             const filtered = allproducts.filter(p => p.category === category);
             showProducts(filtered);
         }
-
-        const imageUrl = button.dataset.image;
-        if (imageUrl) {
-            productSection.style.backgroundImage = `url('${imageUrl}')`;
-            productSection.style.backgroundSize = 'cover';
-            productSection.style.backgroundPosition = 'center';
-            productSection.style.backgroundRepeat = 'no-repeat';
-        } else {
-            productSection.style.backgroundImage = 'none';
-        }
-
 })
 })
 
 function showAllProducts() {
     document.getElementById('cart-section').style.display = 'none';
     document.getElementById('products').style.display = 'grid';
-    productSection.style.backgroundImage = 'none'; 
     showProducts(allproducts); // refresh product display
 }
 

@@ -9,7 +9,10 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f8f9fa;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
 }
 
 /* Header */
@@ -32,6 +35,12 @@ main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
 }
 
 /* Controls section */
@@ -42,9 +51,10 @@ main {
     justify-content: center;
     margin-bottom: 2rem;
     padding: 1rem;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    backdrop-filter: blur(5px);
 }
 
 #controls button {
@@ -132,12 +142,13 @@ main {
 
 /* Cart section */
 #cart-section {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 15px;
     padding: 2rem;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     margin-top: 2rem;
     display: none;
+    backdrop-filter: blur(10px);
 }
 
 #cart-section h1 {
@@ -247,11 +258,12 @@ main {
 
 /* Footer */
 footer {
-    background: #2c3e50;
+    background: rgba(44, 62, 80, 0.9);
     color: white;
     text-align: center;
     padding: 1rem 0;
     margin-top: 2rem;
+    backdrop-filter: blur(10px);
 }
 
 footer p {
