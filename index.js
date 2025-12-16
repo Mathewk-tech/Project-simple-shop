@@ -6,6 +6,9 @@ const m =document.getElementById("items");
 const z=document.getElementById('total');
 let cart=[];//here we are saying we have an array for cart but its = to 0 for now
 
+// Add event listener for back button
+document.getElementById('back-to-products').addEventListener('click', showAllProducts);
+
 //step one is loading all the data when the document is opened by fetching data from the api
 document.addEventListener('DOMContentLoaded', function() {
     fetch(url)//we do this to fecth data in our api
@@ -25,32 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
 //step two is creating a function that shows all products
 function showProducts(products){
     productSection.innerHTML='';
-    // Set grid styles for the product section container
-    //products in our db.json is an array, not an object so we cant use products.category
 
-    productSection.style.display = 'grid';
-    if (products[0].category === "electronics") {
-        productSection.style.gridTemplateColumns = 'repeat(3, 1fr)';
-        productSection.style.gap = '20px';
-        productSection.style.padding = '60px';
-    } else if (products[0].category === "women's clothing") {
-        productSection.style.gridTemplateColumns = 'repeat(3, 1fr)';
-        productSection.style.gap = '20px';
-        productSection.style.padding = '60px';
-    } else {
-        productSection.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
-        productSection.style.gap = '20px';
-        productSection.style.padding = '60px';
-    }
     products.forEach(product => {
         const div=document.createElement("div");
         div.className='product';
-        div.style.background='white';
-        div.style.color='black';
-        div.style.padding='40px';
-        div.style.borderRadius='8px';
-        div.style.boxShadow='0 0 5px rgba(0,0,0,0.1)';
-        
 
         //the const rating checks if in my api there is rating..if not it defaults it to 0
         const rating = product.rating ? product.rating.rate : 0;
@@ -63,16 +44,16 @@ function showProducts(products){
         const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
         let starsHtml = '';//this just clears everything and whatever result will be obtained below is what will be put inside the empty starsHtml
         for (let i = 0; i < fullStars; i++) starsHtml += '★';
-        if (halfStar) starsHtml += '½';//i couldn't find a half rating star so i just put ½
+        if (halfStar) starsHtml += '☆';//i couldn't find a half rating star so i just put ½
         for (let i = 0; i < emptyStars; i++) starsHtml += '☆';
 
         div.innerHTML=`
           <h3>${product.title}</h3>
           <p><strong>Category:</strong> ${product.category}</p>
-          ${product.image ? `<img src="${product.image}" width="100px">` : ''}
+          ${product.image ? `<img src="${product.image}" alt="${product.title}">` : ''}
           <p><strong>Price:</strong> KSH ${product.price}</p> 
-          <p><strong>Rating:</strong> <span style="color: gold; font-size: 1.2em;">${starsHtml}</span> (${rating})</p>
-          <button class="add-to-cart" data-title="${product.title}" data-price="${product.price}" data-image="${product.image}" style="cursor: pointer;">Add to cart</button>
+          <p><strong>Rating:</strong> <span class="rating-stars">${starsHtml}</span> (${rating})</p>
+          <button class="add-to-cart" data-title="${product.title}" data-price="${product.price}" data-image="${product.image}">Add to Cart</button>
         `;
         productSection.appendChild(div);
     
@@ -85,6 +66,7 @@ function showProducts(products){
         const image = this.dataset.image;
         cart.push({title,price,image});
         updatecart();
+        showNotification();
     })
 
     })
@@ -94,18 +76,16 @@ function showProducts(products){
 function updatecart(){
     const itemList=document.getElementById("items");
     const totaldisplay=document.getElementById("total");
+    const cartCount = document.getElementById("cart-count");
     itemList.innerHTML='';
     let total=0;
 
     cart.forEach(item =>{
         const li=document.createElement('li');
-        li.style.display="flex";
-        li.style.alignItems="center";
-        li.style.marginBottom="10px";
 
         li.innerHTML = `
-            <img src="${item.image}" width="50px" height="50px" style="margin-right: 10px;">
-            <span style="flex: 1;">${item.title}</span>
+            <img src="${item.image}" alt="${item.title}">
+            <span>${item.title}</span>
             <strong>KSH ${item.price}</strong>
         `;
 
@@ -114,6 +94,7 @@ function updatecart(){
         total +=item.price;
     });
     totaldisplay.textContent = total.toFixed(2);
+    cartCount.textContent = cart.length;
 }
 
 
@@ -127,7 +108,6 @@ buttons.forEach(button=>{
  const category = button.dataset.category.toLowerCase();
  if(category==='cart'){
     document.getElementById('cart-section').style.display = 'block';
-    productSection.style.backgroundImage = 'none'; 
     productSection.style.display = 'none';
 
     updatecart(); // Refresh cart items display
@@ -151,6 +131,8 @@ buttons.forEach(button=>{
             productSection.style.backgroundSize = 'cover';
             productSection.style.backgroundPosition = 'center';
             productSection.style.backgroundRepeat = 'no-repeat';
+        } else {
+            productSection.style.backgroundImage = 'none';
         }
 
 })
@@ -161,6 +143,14 @@ function showAllProducts() {
     document.getElementById('products').style.display = 'grid';
     productSection.style.backgroundImage = 'none'; 
     showProducts(allproducts); // refresh product display
+}
+
+function showNotification() {
+    const notification = document.getElementById('notification');
+    notification.classList.add('show');
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 2000);
 }
 
 

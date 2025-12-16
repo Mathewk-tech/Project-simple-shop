@@ -3,42 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Shops</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Simple Shop</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <header>
-       <h1 style="text-align: center;">Simple Shops</h1> 
+        <h1>Simple Shop</h1>
     </header>
-<hr>
-  
-    
-    <main >
+
+    <main>
         <section id="controls">
-
-            <button data-category="all" data-image="https://i.pinimg.com/736x/f1/73/8b/f1738bbb89653fa65f6d57cfa18e5244.jpg" style="cursor: pointer;">All products</button>
-            <button data-category="men's clothing" data-image="https://i.pinimg.com/736x/c7/80/db/c780db4be1e0cdd82e9cb6c103b20da1.jpg" style="cursor: pointer;">Men's clothing</button>
-            <button data-category="women's clothing" data-image="https://i.pinimg.com/736x/a7/1d/6e/a71d6ec18cc2b873c7452b411813865f.jpg" style="cursor: pointer;">Women's clothing</button>
-            <button data-category="electronics" data-image="https://i.pinimg.com/736x/78/6e/68/786e68bb0b456e67a2b76b0b738aafb0.jpg"  style="cursor: pointer;">Elecronics</button>
-            <button data-category="jewelery" data-image="https://i.pinimg.com/736x/ac/68/d6/ac68d618cb97a42fb5c95f625cf05f04.jpg" style="cursor: pointer;">jewelery</button>
-            <button data-category="Cart" style="cursor: pointer;">CART</button>
+            <button data-category="all" data-image="https://i.pinimg.com/736x/f1/73/8b/f1738bbb89653fa65f6d57cfa18e5244.jpg">All Products</button>
+            <button data-category="men's clothing" data-image="https://i.pinimg.com/736x/c7/80/db/c780db4be1e0cdd82e9cb6c103b20da1.jpg">Men's Clothing</button>
+            <button data-category="women's clothing" data-image="https://i.pinimg.com/736x/a7/1d/6e/a71d6ec18cc2b873c7452b411813865f.jpg">Women's Clothing</button>
+            <button data-category="electronics" data-image="https://i.pinimg.com/736x/78/6e/68/786e68bb0b456e67a2b76b0b738aafb0.jpg">Electronics</button>
+            <button data-category="jewelery" data-image="https://i.pinimg.com/736x/ac/68/d6/ac68d618cb97a42fb5c95f625cf05f04.jpg">Jewelry</button>
+            <button data-category="Cart" id="cart-btn">Cart (<span id="cart-count">0</span>)</button>
         </section>
+
         <section id="products">
-
-
         </section>
 
-        <section id="cart-section" style="display: none;padding: 20px;background:  #f9f9f9;">
-                
-                <h1>CART</h1>
-                <ul id="items"></ul>
-                <p>Total:KSH <span id="total">0.00</span></p>
-
+        <section id="cart-section">
+            <button id="back-to-products" class="back-btn">← Back to Products</button>
+            <h1>Your Cart</h1>
+            <ul id="items"></ul>
+            <p>Total: KSH <span id="total">0.00</span></p>
         </section>
- 
-        
     </main>
 
+    <footer>
+        <p>&copy; 2025 Simple Shop. All rights reserved.</p>
+    </footer>
+
+    <div id="notification" class="notification">Item added to cart!</div>
 
     <script src="./index.js"></script>
 </body>
